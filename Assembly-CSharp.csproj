@@ -41,6 +41,7 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Users\Ou\Scripts\GameOver.cs" />
      <Compile Include="Assets\Users\Ou\Scripts\Player.cs" />
      <Reference Include="UnityEngine">
      <HintPath>E:\Study\2021.2.15f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
