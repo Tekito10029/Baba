@@ -8,6 +8,7 @@ public class Boom : MonoBehaviour
 
     float countdown;
     bool hasExploded = false;
+    public GameObject explosion;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +18,7 @@ public class Boom : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         countdown -= Time.deltaTime;
         if(countdown <= 0f && !hasExploded)
         {
@@ -29,8 +31,11 @@ public class Boom : MonoBehaviour
     {
         Debug.Log("Boom!");
         //effect
+        Instantiate(explosion, transform.position,transform.rotation);
         //remove
-        Destroy(this.gameObject);
+        Destroy(gameObject);
         
     }
+    
+   
 }
