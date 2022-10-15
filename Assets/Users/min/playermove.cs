@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class playermove : MonoBehaviour
 {
-    public Vector2 speed = new Vector2(50, 50);
+    //public Vector2 speed = new Vector2(50, 50);
+    [SerializeField]
+    private float speed = 5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,9 +17,9 @@ public class playermove : MonoBehaviour
     void Update()
     {
         float inputX = Input.GetAxis("Horizontal");
-        float InputY = Input.GetAxis("Vertical");
+        
 
-        Vector3 movement = new Vector3(speed.x * inputX, 0 ,0);
+        Vector3 movement = new Vector3(speed * inputX, 0 ,0);
         movement *= Time.deltaTime;
 
         transform.Translate(movement);
