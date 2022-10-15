@@ -17,7 +17,8 @@ public class gamemanager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            Instantiate(Boom, outpos.position,Quaternion.identity);
+            Instantiate(Boom, outpos.position,Quaternion.identity);  
         }
     }
+   
 }

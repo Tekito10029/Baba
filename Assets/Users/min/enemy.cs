@@ -2,21 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class enemy : MonoBehaviour
 {
     //public Vector2 speed = new Vector2(50, 0);
     // public Vector2 speed1 = new Vector2(20, 0);
-    [SerializeField] private float speed = 3f;
+    [SerializeField] private float speed = 10f;
     [SerializeField] private Rigidbody2D rb;
 
     [Space(5)]
-    [SerializeField] private float DSpeed = 2f;
+    [SerializeField] private float DSpeed = 9f;
     [SerializeField] private float DTime = 3f;
+    [SerializeField] public bool decreasing;
+    [SerializeField] public bool gimiku;
+    public GameObject explosion;
 
-    private bool isBoostedtrue = false;
+
     // Start is called before the first frame update
     void Start()
     {
+        gimiku = false;
+        decreasing = false;
         if(rb == null)
         {
             rb = GetComponent<Rigidbody2D>();
@@ -31,29 +37,35 @@ public class enemy : MonoBehaviour
         movement *= Time.deltaTime;
         transform.Translate(movement);
 
-        if(!isBoostedtrue)
-        {
-            isBoostedtrue = true;
-            Invoke("EndBoost", DTime);
-        }
     }
-    private void EndBoost()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        isBoostedtrue = false;
-    }
-    private void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.name == "Boom")
+        if(collision.gameObject.name =="Boom")
         {
-            if (isBoostedtrue)
+            Debug.Log("Touching");
+            Instantiate(explosion, transform.position, transform.rotation);
+            if (gimiku)
             {
-                rb.velocity = transform.forward * (speed - DSpeed);
-                Debug.Log("True");
+                if (decreasing)
+                {
+                    speed = speed - DSpeed;
+                }
             }
-            else
+            if (!decreasing)
             {
-                rb.velocity = transform.forward * speed;
+                Debug.Log("Decreasing the speed");
+                decreasing = true;
+                Invoke("EndDecrease", DTime);
             }
         }
     }
+    private void EndDecrease()
+    {
+        decreasing = false;
+    }
+    
+           
+            
+        
+ 
 }
