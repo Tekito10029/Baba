@@ -5,7 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - effect
   - Enemy
+  - Boom
   layers:
   - Default
   - TransparentFX

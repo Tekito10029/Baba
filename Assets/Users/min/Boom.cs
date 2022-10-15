@@ -4,26 +4,38 @@ using UnityEngine;
 
 public class Boom : MonoBehaviour
 {
-    public float delay = 1f;
+    //public float delay = 1f;
 
-    float countdown;
-    bool hasExploded = false;
+    //float countdown;
+   // bool hasExploded = false;
     public GameObject explosion;
+    [SerializeField]
+    private GameObject Enemy;
+    [SerializeField]
+    private enemy EMY;
     // Start is called before the first frame update
     void Start()
     {
-        countdown = delay;
+       // countdown = delay;
     }
 
     // Update is called once per frame
     void Update()
     {
         
-        countdown -= Time.deltaTime;
-        if(countdown <= 0f && !hasExploded)
+       // countdown -= Time.deltaTime;
+        //if(countdown <= 0f && !hasExploded)
+       // {
+        //    Explode();
+       //     hasExploded = true;
+       // }
+       
+    }
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.name == "Enemy")
         {
             Explode();
-            hasExploded = true;
         }
     }
 
