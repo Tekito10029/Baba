@@ -2,21 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class enemy : MonoBehaviour
 {
     //public Vector2 speed = new Vector2(50, 0);
     // public Vector2 speed1 = new Vector2(20, 0);
-    [SerializeField] private float speed = 3f;
+    private float speed;
+    private float boostTimer;
+    public bool decreasing;
     [SerializeField] private Rigidbody2D rb;
 
-    [Space(5)]
-    [SerializeField] private float DSpeed = 2f;
-    [SerializeField] private float DTime = 3f;
-
-    private bool isBoostedtrue = false;
     // Start is called before the first frame update
     void Start()
     {
+        speed = 10f;
+        boostTimer = 0;
+        decreasing = false;
         if(rb == null)
         {
             rb = GetComponent<Rigidbody2D>();
@@ -30,30 +31,26 @@ public class enemy : MonoBehaviour
         Vector3 movement = new Vector3(speed * inputX, 0, 0);
         movement *= Time.deltaTime;
         transform.Translate(movement);
-
-        if(!isBoostedtrue)
+        
+        if(decreasing)
         {
-            isBoostedtrue = true;
-            Invoke("EndBoost", DTime);
+            boostTimer += Time.deltaTime;
+            if(boostTimer >= 3)
+            {
+                speed = 10;
+                boostTimer = 0;
+                decreasing = false;
+            }
         }
+
     }
-    private void EndBoost()
+    void OnTriggerEnter2D(Collider2D other)
     {
-        isBoostedtrue = false;
-    }
-    private void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.name == "Boom")
+        if(other.tag == "Boom")
         {
-            if (isBoostedtrue)
-            {
-                rb.velocity = transform.forward * (speed - DSpeed);
-                Debug.Log("True");
-            }
-            else
-            {
-                rb.velocity = transform.forward * speed;
-            }
+            decreasing = true;
+            speed = 3;
+            Destroy(other.gameObject);
         }
     }
 }

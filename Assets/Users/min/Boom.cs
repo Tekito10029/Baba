@@ -8,46 +8,31 @@ public class Boom : MonoBehaviour
 
     //float countdown;
    // bool hasExploded = false;
-    public GameObject explosion;
-    [SerializeField]
-    private GameObject Enemy;
-    [SerializeField]
-    private enemy EMY;
-    // Start is called before the first frame update
+    //public GameObject explosion;
+    
+     public GameObject explosion;
     void Start()
     {
-       // countdown = delay;
+       
     }
 
     // Update is called once per frame
     void Update()
     {
         
-       // countdown -= Time.deltaTime;
-        //if(countdown <= 0f && !hasExploded)
-       // {
-        //    Explode();
-       //     hasExploded = true;
-       // }
-       
     }
-    private void OnCollisionEnter2D(Collision2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.name == "Enemy")
         {
-            Explode();
+            Debug.Log("Boom!");
+            //effect
+            Instantiate(explosion, transform.position, transform.rotation); 
+           
         }
     }
 
-    void Explode()
-    {
-        Debug.Log("Boom!");
-        //effect
-        Instantiate(explosion, transform.position,transform.rotation);
-        //remove
-        Destroy(gameObject);
-        
-    }
+    
     
    
 }
