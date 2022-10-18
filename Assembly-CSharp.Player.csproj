@@ -43,6 +43,9 @@
   <ItemGroup>
      <Compile Include="Assets\Users\Ou\Scripts\GameOver.cs" />
      <Compile Include="Assets\Users\Ou\Scripts\Player.cs" />
+     <Compile Include="Assets\Users\Ou\Orc Warrior\Scripts\MouseController.cs" />
+     <Compile Include="Assets\Users\Ou\Scripts\AnimationSwitch.cs" />
+     <Compile Include="Assets\Users\Ou\Scripts\EventHander.cs" />
      <Reference Include="UnityEngine">
      <HintPath>E:\Study\2021.2.15f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\Variations\mono\Managed\UnityEngine.dll</HintPath>
      </Reference>

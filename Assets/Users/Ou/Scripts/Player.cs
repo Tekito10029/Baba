@@ -1,81 +1,60 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
 using UnityEngine;
-using UnityEngine.Experimental.Playables;
-using UnityEngine.SearchService;
+using UnityEngine.Assertions.Must;
 
 public class Player : MonoBehaviour
 {
-    private Rigidbody2D rb => GetComponent<Rigidbody2D>();
-    private Animator anim => GetComponent<Animator>();
-
-    public float jumpForce;
-    public int  jumpNum;
-    private int jumpCurreNum;
-    private float speed=10f;
-    private float andPlayer;
-    public Transform playerPoint;
-    public LayerMask layer;
-    private bool isThis;
-
-    private CircleCollider2D _circleCollider2D=>GetComponent<CircleCollider2D>();
-
-    private bool isGround;
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        jumpCurreNum = jumpNum;
-    }
+    private Rigidbody2D rb =>GetComponent<Rigidbody2D>();
+    private BoxCollider2D boxColl2D =>GetComponent<BoxCollider2D>();
+    public bool isJump;
+    public bool isGround;
+    [SerializeField]
+    private float jumpForce;
+    [SerializeField]
+    private int jumpNum;
+    [SerializeField]
+    private Transform Point;
+    
+    private float andPoint;
+  
 
     // Update is called once per frame
     void Update()
     {
-        ChickGround();
-        AndPlayer();
-        if (Input.GetKeyDown(KeyCode.Space)&& jumpCurreNum >0)
-        {
-            anim.SetBool("IsGround",false);
-            rb.velocity += Vector2.up*jumpForce;
-            jumpCurreNum--;
-            anim.SetTrigger("IsJump");
-        }
-        
-
-
-
-
-
-        if (andPlayer > .1)
-        {
-            this.transform.position = Vector2.MoveTowards(transform.position, playerPoint.position,
-                speed * Time.deltaTime);
-        }
-       
-       
+        AndPointDistance();
+        Jump();
+        CheckGround();
         
     }
 
-    private void ChickGround()
+    private void AndPointDistance()
     {
-        isGround = Physics2D.IsTouchingLayers(_circleCollider2D, layer);
-      
-       
-        if (isGround)
+       andPoint= Vector3.Distance(transform.position, Point.transform.position);
+        if (andPoint > .2f)
         {
-           
-            jumpCurreNum = jumpNum;
-            anim.SetBool("IsGround",true);
+           transform.position = Vector3.MoveTowards(transform.position, Point.transform.position, 2f * Time.deltaTime);
         }
     }
 
-    private void AndPlayer()
+    private void CheckGround()
     {
-        andPlayer = Vector3.Distance(this.transform.position, playerPoint.transform.position);
+         isGround = boxColl2D.IsTouchingLayers(LayerMask.GetMask("Ground"));
+         if (isGround)
+         {
+             jumpNum = 1;
+             isJump = false;
+         }
     }
 
- 
+    private void Jump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space)&& jumpNum >0)
+        {
+            isJump = true;
+            jumpNum--;
+            rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+
+        }
+    }
 }
