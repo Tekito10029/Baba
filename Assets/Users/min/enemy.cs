@@ -7,21 +7,16 @@ public class enemy : MonoBehaviour
 {
     //public Vector2 speed = new Vector2(50, 0);
     // public Vector2 speed1 = new Vector2(20, 0);
-    [SerializeField] private float speed = 10f;
+    private float speed;
+    private float boostTimer;
+    public bool decreasing;
     [SerializeField] private Rigidbody2D rb;
-
-    [Space(5)]
-    [SerializeField] private float DSpeed = 9f;
-    [SerializeField] private float DTime = 3f;
-    [SerializeField] public bool decreasing;
-    [SerializeField] public bool gimiku;
-    public GameObject explosion;
-
 
     // Start is called before the first frame update
     void Start()
     {
-        gimiku = false;
+        speed = 10f;
+        boostTimer = 0;
         decreasing = false;
         if(rb == null)
         {
@@ -36,36 +31,26 @@ public class enemy : MonoBehaviour
         Vector3 movement = new Vector3(speed * inputX, 0, 0);
         movement *= Time.deltaTime;
         transform.Translate(movement);
-
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.name =="Boom")
+        
+        if(decreasing)
         {
-            Debug.Log("Touching");
-            Instantiate(explosion, transform.position, transform.rotation);
-            if (gimiku)
+            boostTimer += Time.deltaTime;
+            if(boostTimer >= 3)
             {
-                if (decreasing)
-                {
-                    speed = speed - DSpeed;
-                }
-            }
-            if (!decreasing)
-            {
-                Debug.Log("Decreasing the speed");
-                decreasing = true;
-                Invoke("EndDecrease", DTime);
+                speed = 10;
+                boostTimer = 0;
+                decreasing = false;
             }
         }
+
     }
-    private void EndDecrease()
+    void OnTriggerEnter2D(Collider2D other)
     {
-        decreasing = false;
+        if(other.tag == "Boom")
+        {
+            decreasing = true;
+            speed = 3;
+            Destroy(other.gameObject);
+        }
     }
-    
-           
-            
-        
- 
 }

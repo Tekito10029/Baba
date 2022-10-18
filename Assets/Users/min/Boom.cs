@@ -9,16 +9,11 @@ public class Boom : MonoBehaviour
     //float countdown;
    // bool hasExploded = false;
     //public GameObject explosion;
-    [SerializeField]
-    private GameObject Enemy;
-    [SerializeField]
-    enemy Enemycon;
-    // Start is called before the first frame update
+    
+     public GameObject explosion;
     void Start()
     {
-        // countdown = delay;
-        Enemycon = Enemy.GetComponent<enemy>();
-        Enemy = GameObject.Find("Enemy");
+       
     }
 
     // Update is called once per frame
@@ -26,16 +21,14 @@ public class Boom : MonoBehaviour
     {
         
     }
-    private void OnCollisionEnter2D(Collision2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.name == "Enemy")
         {
             Debug.Log("Boom!");
             //effect
-            
-            //Enemycon.gimiku = true;
-            //remove
-            //Destroy(gameObject);
+            Instantiate(explosion, transform.position, transform.rotation); 
+           
         }
     }
 
