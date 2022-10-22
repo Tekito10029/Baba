@@ -56,11 +56,11 @@
     <Analyzer Include="/Applications/Visual Studio.app/Contents/MonoBundle/Addins/MonoDevelop.Unity/Analyzers/Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets/Users/Thuong/Scripts/LevelLoader.cs" />
     <Compile Include="Assets/Users/Thuong/Scripts/SoundManager.cs" />
     <Compile Include="Assets/Users/Thuong/Scripts/TestSound.cs" />
     <Compile Include="Assets/Users/Ou/Scripts/Player.cs" />
     <Compile Include="Assets/Users/Thuong/Scripts/ButtonTestSceneChange.cs" />
-    <Compile Include="Assets/Users/Thuong/Scripts/LevelLoader.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

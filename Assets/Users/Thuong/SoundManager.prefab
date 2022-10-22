@@ -45,10 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Sounds:
-  - soundName: BGmTest
+  - soundName: BGM
     volume: 0.497
     pitch: 1.61
-    SEclip: {fileID: 0}
-    BGMclip: {fileID: 8300000, guid: d28bd50aa01a54a7dad652b4d66289ec, type: 3}
+    clip: {fileID: 8300000, guid: 3baf61c6e45ed4fbe8e8c7fc063845f3, type: 3}
     loop: 1
     source: {fileID: 0}

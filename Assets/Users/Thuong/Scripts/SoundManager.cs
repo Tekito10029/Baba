@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.Audio;
 using System;
+using System.Linq;
 
 // 音量管理クラス
 [Serializable]
@@ -14,8 +15,7 @@ public class Sound
     public float volume = 1;
     [Range(0.1f, 3f)]
     public float pitch;
-    public AudioClip SEclip;
-    public AudioClip BGMclip;
+    public AudioClip clip;
     public bool loop;
     //
     [HideInInspector]
@@ -27,9 +27,7 @@ public class Sound
     }
 }
 public class SoundManager : MonoBehaviour
-{
-
-    public static SoundManager _instance;
+{ 
     public Sound[] Sounds;
 
     void Awake()
@@ -43,12 +41,19 @@ public class SoundManager : MonoBehaviour
         //    Destroy(gameObject);
         //    return;
         //}
-        // 音管理はシーン遷移では破棄させない
         DontDestroyOnLoad(gameObject);
         foreach (Sound s in Sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.BGMclip;
+            if(s.clip == null)
+            {
+                Debug.LogWarning("don't have any sound in list sounds ! ");
+                return;
+            }
+            else
+            {
+                s.source.clip = s.clip;
+            }
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
@@ -57,9 +62,14 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
-        PlayAnySound("BGmTest");
+        PlayAnySound("BGM");
     }
-    void PlayAnySound(string name)
+
+    private void Update()
+    {
+        
+    }
+    public void PlayAnySound(string name)
     {
         Sound s = Array.Find(Sounds, sound => sound.soundName == name);
         if (s == null)
@@ -69,5 +79,9 @@ public class SoundManager : MonoBehaviour
         }
            
         s.source.Play();
+    }
+    public void StopBGM()
+    {
+
     }
 }
