@@ -12,11 +12,11 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{85e1d5b1-7c6d-f9e9-6007-e64b1ff8d953}</ProjectGuid>
+    <ProjectGuid>{5508ac33-887a-5cda-f087-1bc53e6cf96c}</ProjectGuid>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Unity.2D.Sprite.Package.EditorTests</AssemblyName>
+    <AssemblyName>Unity.Sysroot.Linux_x86_64.EditorTests</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -41,7 +41,7 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <None Include="Library\PackageCache\com.unity.2d.sprite@1.0.0\Tests\Editor\Unity.2D.Sprite.Package.EditorTests.asmdef" />
+     <None Include="Library\PackageCache\com.unity.sysroot.linux-x86_64@2.0.2\Tests\Editor\Unity.Sysroot.Linux-x86_64.EditorTests.asmdef" />
      <Reference Include="UnityEngine">
      <HintPath>C:\Program Files\UnityEditor\2021.2.15f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
      </Reference>

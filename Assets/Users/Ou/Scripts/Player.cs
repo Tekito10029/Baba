@@ -25,7 +25,8 @@ public class Player : MonoBehaviour
         AndPointDistance();
         Jump();
         CheckGround();
-        
+
+        this.gameObject.transform.Translate(0.25f,0,0);
     }
 
     private void AndPointDistance()

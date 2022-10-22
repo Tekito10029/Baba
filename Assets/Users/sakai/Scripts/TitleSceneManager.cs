@@ -16,7 +16,7 @@ public class TitleSceneManager : MonoBehaviour
     {
         if (Input.GetKeyDown("space")) //スペースキーを押した場合
         {
-            SceneManager.LoadScene("GameSceneSample");//GameSceneSampleシーンをロードする
+            SceneManager.LoadScene("Map");//GameSceneSampleシーンをロードする
         }
     }
 }

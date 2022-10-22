@@ -7,6 +7,8 @@ public class TilemapControl : MonoBehaviour
 {
     public Tilemap tilemap;
     public Tile tile, tile2;
+
+    public int length = 500;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,7 +48,10 @@ public class TilemapControl : MonoBehaviour
 
 
             i += 3;
-            yield return new WaitForSeconds(0.1f);
+            //yield return new WaitForSeconds(0.1f);
+            if (i > length)
+                break;
         }
+
     }
 }
